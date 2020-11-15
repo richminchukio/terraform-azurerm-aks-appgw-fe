@@ -27,7 +27,7 @@ echo -n "variable \"ssh_public_key\" {}
 
 module \"aks-appgw-fe\" {
   source  = \"richminchukio/aks-appgw-fe/azurerm\"
-  version = \"0.1.1\"
+  version = \"0.1.2\"
   
   ssh_public_key = file(\"~/.ssh/id_rsa.pub\")
 }" >./main.tf
@@ -43,18 +43,18 @@ export TF_VAR_blue_green=blue # blue or green. you decide
 export TF_VAR_infra_prefix=tf_${RANDOM} # you should replace this with something not random
 export TF_VAR_location=eastus # where do you want your aks/appgw deployed
 
-# SENSIBLE DEFAULTS
-export TF_VAR_helm_aad_pod_identity_version=2.0.2
-export TF_VAR_helm_cert_manager_version=v1.0.1
-export TF_VAR_helm_ingress_azure_version=1.2.0
+# SENSIBLE DEFAULTS - override when necessary
+# export TF_VAR_helm_aad_pod_identity_version=2.0.2
+# export TF_VAR_helm_cert_manager_version=v1.0.1
+# export TF_VAR_helm_ingress_azure_version=1.2.0
 export TF_VAR_k8s_version=$(az aks get-versions --location $TF_VAR_location --output table | grep 1.18 | head -n 1 | awk '{print $1}') 
-# always try to use the latest version of 1.18.x for now. ^^^^^^ https://docs.microsoft.com/en-us/azure/aks/supported-kubernetes-versions#azure-portal-and-cli-versions
+# always try to use the latest version of kubernetes v1.18.x available in your region for now. ^^^^^^ https://docs.microsoft.com/en-us/azure/aks/supported-kubernetes-versions#azure-portal-and-cli-versions
 
-# initialize the terraform repo locally and clean up the terraform providers
+# INIT - initialize the terraform repo locally and clean up the terraform providers
 rm -rf .terraform # it's best to wipe this folder out each time before init-ing, and before each terraform plan command.
 terraform init -backend-config="key=$TF_VAR_blue_green.tfstate"
 
-# always try to setup the kube config before we plan/apply anything. IE: Helm chart terraform resources may fail to deploy if you don't have your kube config set up. You'll likely want to run this each time before you terraform plan/apply.
+# AKS CLI AND .KUBE/CONFIG - always try to setup the kube config before we plan/apply anything. IE: Helm chart terraform resources may fail to deploy if you don't have your kube config set up. You'll likely want to run this each time before you terraform plan/apply.
 az aks install-cli \
    --client-version ${TF_VAR_k8s_version} 2>/dev/null
 az aks get-credentials \
@@ -64,9 +64,9 @@ az aks get-credentials \
    --admin 2>/dev/null
 kubectl config use-context ${TF_VAR_infra_prefix}_aks_${TF_VAR_blue_green}-admin 2>/dev/null
 
-# plan the deployment
+# PLAN - plan the deployment
 terraform plan -out "plan.$TF_VAR_blue_green.tfplan"
 
-# build the proposed blue or green infrastructure
+# APPLY - build the proposed blue or green infrastructure
 terraform apply "plan.$TF_VAR_blue_green.tfplan"
 ```
