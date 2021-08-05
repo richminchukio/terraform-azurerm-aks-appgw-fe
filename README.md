@@ -23,11 +23,9 @@ az provider register --namespace Microsoft.ContainerService
 ssh-keygen
 
 # create a main.tf file
-echo -n "variable \"ssh_public_key\" {}
-
-module \"aks-appgw-fe\" {
+echo -n "module \"aks-appgw-fe\" {
   source  = \"richminchukio/aks-appgw-fe/azurerm\"
-  version = \"0.1.2\"
+  version = \"0.2.0\"
   
   ssh_public_key = file(\"~/.ssh/id_rsa.pub\")
 }" >./main.tf
@@ -44,11 +42,11 @@ export TF_VAR_infra_prefix=tf_${RANDOM} # you should replace this with something
 export TF_VAR_location=eastus # where do you want your aks/appgw deployed
 
 # SENSIBLE DEFAULTS - override when necessary
-# export TF_VAR_helm_aad_pod_identity_version=2.0.2
-# export TF_VAR_helm_cert_manager_version=v1.0.1
-# export TF_VAR_helm_ingress_azure_version=1.2.0
-export TF_VAR_k8s_version=$(az aks get-versions --location $TF_VAR_location --output table | grep 1.18 | head -n 1 | awk '{print $1}') 
-# always try to use the latest version of kubernetes v1.18.x available in your region for now. ^^^^^^ https://docs.microsoft.com/en-us/azure/aks/supported-kubernetes-versions#azure-portal-and-cli-versions
+export TF_VAR_helm_aad_pod_identity_version=4.1.3
+export TF_VAR_helm_cert_manager_version=v1.4.2
+export TF_VAR_helm_ingress_azure_version=1.2.1
+export TF_VAR_k8s_version=$(az aks get-versions --location $TF_VAR_location --output table | grep 1.21 | head -n 1 | awk '{print $1}') 
+# always try to use the latest version of kubernetes v1.21.x available in your region for now. ^^^^^^ https://docs.microsoft.com/en-us/azure/aks/supported-kubernetes-versions#azure-portal-and-cli-versions
 
 # INIT - initialize the terraform repo locally and clean up the terraform providers
 rm -rf .terraform # it's best to wipe this folder out each time before init-ing, and before each terraform plan command.
