@@ -43,19 +43,19 @@ variable "blue_green" {
 variable "helm_aad_pod_identity_version" {
    type = string
    description = "the chart version"
-   default = "2.0.2"
+   default = ""
 }
 
 variable "helm_ingress_azure_version" {
    type = string
    description = "the chart version"
-   default = "1.2.0"
+   default = ""
 }
 
 variable "helm_cert_manager_version" {
    type = string
    description = "the chart version"
-   default = "v1.0.1"
+   default = ""
 }
 
 variable "infra_prefix" {
@@ -67,7 +67,7 @@ variable "infra_prefix" {
 variable "k8s_version" {
    type = string
    description = "Which Kuberentes preview aks version to create"
-   default = "1.18.6"
+   default = ""
 }
 
 variable "location" {
