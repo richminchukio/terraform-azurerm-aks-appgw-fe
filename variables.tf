@@ -10,6 +10,12 @@ variable "arm_client_secret" {
    default = ""
 }
 
+variable "arm_kubernetes_config_path" {
+   type = string
+   description = "For CI in Azure DevOps Pipelines. Helm needs to explicitly know where the ~/.kube/config is."
+   default = ""
+}
+
 variable "arm_subscription_id" {
    type = string
    description = "For CI in Azure DevOps Pipelines. TF AzureRM Provider does not support using the Azure CLI"
