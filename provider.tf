@@ -13,5 +13,6 @@ provider "null" {
 
 provider "helm" {
    kubernetes {
+      config_path = (var.arm_kubernetes_config_path != "" ? var.arm_kubernetes_config_path : "~/.kube/config")
    }
 }
