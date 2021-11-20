@@ -5,7 +5,7 @@ This repo supports blue green infrastructure deploys and preview versions of Azu
 ```sh
 # install tools
 brew update
-brew install azure-cli terraform jq
+brew install azure-cli terraform jq yq
 az login
 
 # enable preview extensions in cli
@@ -45,8 +45,8 @@ export TF_VAR_location=eastus # where do you want your aks/appgw deployed
 export TF_VAR_helm_aad_pod_identity_version=4.1.3
 export TF_VAR_helm_cert_manager_version=v1.4.2
 export TF_VAR_helm_ingress_azure_version=1.2.1
-export TF_VAR_k8s_version=$(az aks get-versions --location $TF_VAR_location --output table | grep 1.21 | head -n 1 | awk '{print $1}') 
-# always try to use the latest version of kubernetes v1.21.x available in your region for now. ^^^^^^ https://docs.microsoft.com/en-us/azure/aks/supported-kubernetes-versions#azure-portal-and-cli-versions
+export TF_VAR_k8s_version=$(az aks get-versions --location $TF_VAR_location --output yaml | yq e '.orchestrators[].orchestratorVersion' - | tail -n 1) 
+# always try to use the latest version of kubernetes available in your region. ^^^^^^ https://docs.microsoft.com/en-us/azure/aks/supported-kubernetes-versions#azure-portal-and-cli-versions
 
 # INIT - initialize the terraform repo locally and clean up the terraform providers
 rm -rf .terraform # it's best to wipe this folder out each time before init-ing, and before each terraform plan command.
