@@ -64,6 +64,6 @@ resource "helm_release" "aks_appgw_fe" {
    set {
       type  = "string"
       name  = "ingress.host"
-      value = var.helm_ingress_host != "" ? var.helm_ingress_host : var.azurerm_public_ip_fqdn
+      value = fileexists(var.helm_aks_appgw_fe_values_yaml_full_path) ? coalesce(yamldecode(file(var.helm_aks_appgw_fe_values_yaml_full_path))["ingress"]["host"], var.azurerm_public_ip_fqdn) : var.azurerm_public_ip_fqdn
    }
 }
