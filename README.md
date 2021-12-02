@@ -31,7 +31,7 @@ az provider register --namespace Microsoft.ContainerService
 ssh-keygen
 ```
 
-# GET values.yaml from the richminchukio/aks-appgw-fe helm chart repostitory
+# GET values.yaml from the richminchukio/aks-appgw-fe helm chart repository
 curl --output ./values.yaml https://raw.githubusercontent.com/richminchukio/helm-aks-appgw-fe/main/values.yaml
 
 ```zsh
@@ -53,7 +53,7 @@ module \"aks-appgw-fe\" {
    infra_prefix                            = var.infra_prefix
    k8s_version                             = var.k8s_version
    ssh_public_key                          = file(\"~/.ssh/id_rsa.pub\")
-}" >./main.tf
+}" >>./main.tf
 ```
 
 ## SETUP variables.tf.json
@@ -111,7 +111,7 @@ export k8s_version=$(cat variables.tf.json | jq -r .variable.k8s_version.default
 export infra_prefix=$(cat variables.tf.json | jq -r .variable.infra_prefix.default)
 
 # INIT - initialize the terraform repo locally and clean up the terraform providers
-rm -rf .terraform # it's best to wipe this folder out each time before init-ing, and before each terraform plan command.
+rm -rf .terraform # it is best to wipe this folder out each time before init-ing, and before each terraform plan command.
 terraform init -backend-config="key=$blue_green.tfstate"
 
 # AKS CLI AND .KUBE/CONFIG - always try to setup the kube config before we plan/apply anything.
