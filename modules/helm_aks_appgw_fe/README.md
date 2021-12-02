@@ -27,7 +27,7 @@ module "aks-appgw-fe" {
    ssh_public_key                          = file("~/.ssh/id_rsa.pub")
 }
 
-module "aks-appgw-fe-subpath" {
+module "aks-appgw-fe_helm_aks_appgw_fe" {
    source  = "richminchukio/aks-appgw-fe/azurerm/helm_aks_appgw_fe"
    version = "1.0.0"
 
@@ -37,10 +37,8 @@ module "aks-appgw-fe-subpath" {
    azurerm_public_ip_fqdn                  = azurerm_public_ip.public_ip.fqdn
    azurerm_rg_name                         = azurerm_resource_group.resource_group.name
    azurerm_subscription_id                 = data.azurerm_subscription.current.subscription_id
-   blue_green                              = var.blue_green
    helm_aks_appgw_fe_version               = var.helm_aks_appgw_fe_version
    helm_aks_appgw_fe_values_yaml_full_path = "./values.standalone.yaml"
-   infra_prefix                            = var.infra_prefix
 }
 ```
 
@@ -52,13 +50,13 @@ Get the values files, and amend it with the following yaml, and save as a new ch
 ######################################################################################################
 # values.standalone.patch.yaml
 # https://raw.githubusercontent.com/richminchukio/helm-aks-appgw-fe/main/values.standalone.patch.yaml
-
-aad-pod-identity:
-  enabled: false # disable the aad-pod-identity chart
-cert-manager:
-  enabled: false # disable the cert-manager chart
-ingress-azure:
-  enabled: false # disable the ingress-azure chart
+aks-appgw-fe:
+  aad-pod-identity:
+    enabled: false # disable the aad-pod-identity chart
+  cert-manager:
+    enabled: false # disable the cert-manager chart
+  ingress-azure:
+    enabled: false # disable the ingress-azure chart
 
 issuer:
   enabled: false # disable the recreation of the cert-manager.io/Issuer resource:
