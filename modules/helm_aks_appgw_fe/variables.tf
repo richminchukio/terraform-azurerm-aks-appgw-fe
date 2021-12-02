@@ -28,12 +28,6 @@ variable "azurerm_subscription_id" {
    description = "Azurerm subscription id."
 }
 
-variable "blue_green" {
-   type        = string
-   description = "Which infrastructure to operate terraform against ('blue' or 'green')"
-   default     = "blue"
-}
-
 variable "cert_manager_crds_hack_enabled" {
    type        = bool
    description = "helm doesn't deploy dependant chart CRDs before the parent chart api objects. IE: cert-manager.io/Issuer manifest fails to deploy. Cert-Manager needs to support CRDs folder naming convention for helm 3, until then hack it."
@@ -49,53 +43,6 @@ variable "cert_manager_crds_hack_url" {
 variable "helm_aks_appgw_fe_version" {
    type        = string
    description = "the richminchukio/aks-appgw-fe chart version"
-}
-
-variable "helm_cert_manager_startupapicheck_enabled" {
-   type        = string
-   description = "cert manager does not start without issues, so disable by default"
-   default     = "false"
-}
-
-variable "helm_image_repository" {
-   type        = string
-   description = "The default image repository to use for the fe container"
-   default     = "httpd"
-}
-
-variable "helm_image_tag" {
-   type        = string
-   description = "The default image tag to use for the fe container"
-   default     = "latest"
-}
-
-variable "helm_ingress_host" {
-   type        = string
-   description = "Defaults to the DNS name of your Public IP which is assigned to your Application Gateway, but otherwise in prod envs, your domain name."
-   default     = ""
-}
-
-variable "helm_issuer_acme_privateKeySecretRef_name" {
-   type        = string
-   description = "we default the name of the secret to staging in case you want to reuse the module for prod."
-   default     = "issuer-account-key-staging"
-}
-
-variable "helm_issuer_acme_server" {
-   type        = string
-   description = "The letsencrypt.org staging server"
-   default     = "https://acme-staging-v02.api.letsencrypt.org/directory"
-}
-
-variable "helm_issuer_acme_solver0_http01_ingress_class" {
-   type        = string
-   description = "the solver http class"
-   default     = "azure/application-gateway"
-}
-
-variable "infra_prefix" {
-   type        = string
-   description = "ie 'tf_my_thing'"
 }
 
 variable "helm_aks_appgw_fe_values_yaml_full_path" {
