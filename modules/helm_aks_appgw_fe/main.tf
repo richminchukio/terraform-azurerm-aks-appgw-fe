@@ -33,31 +33,31 @@ resource "helm_release" "aks_appgw_fe" {
 
    set {
       type  = "string"
-      name  = "ingress-azure.appgw.subscriptionId"
+      name  = "aks-appgw-fe.ingress-azure.appgw.subscriptionId"
       value = var.azurerm_subscription_id
    }
 
    set {
       type  = "string"
-      name  = "ingress-azure.appgw.resourceGroup"
+      name  = "aks-appgw-fe.ingress-azure.appgw.resourceGroup"
       value = var.azurerm_rg_name
    }
 
    set {
       type  = "string"
-      name  = "ingress-azure.appgw.name"
+      name  = "aks-appgw-fe.ingress-azure.appgw.name"
       value = var.azurerm_appgw_name
    }
 
    set {
       type  = "string"
-      name  = "ingress-azure.armAuth.identityResourceID"
+      name  = "aks-appgw-fe.ingress-azure.armAuth.identityResourceID"
       value = var.azurerm_auth_identity_resource_id
    }
 
    set {
       type  = "string"
-      name  = "ingress-azure.armAuth.identityClientID"
+      name  = "aks-appgw-fe.ingress-azure.armAuth.identityClientID"
       value = var.azurerm_auth_identity_client_id
    }
 
