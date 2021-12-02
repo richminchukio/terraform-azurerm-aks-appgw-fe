@@ -95,10 +95,8 @@ module "aks_appgw_fe" {
    azurerm_public_ip_fqdn                        = azurerm_public_ip.public_ip.fqdn
    azurerm_rg_name                               = azurerm_resource_group.resource_group.name
    azurerm_subscription_id                       = data.azurerm_subscription.current.subscription_id
-   blue_green                                    = var.blue_green
    helm_aks_appgw_fe_version                     = var.helm_aks_appgw_fe_version
    helm_aks_appgw_fe_values_yaml_full_path       = var.helm_aks_appgw_fe_values_yaml_full_path
-   infra_prefix                                  = var.infra_prefix
 }
 
 output "ip_address" {
