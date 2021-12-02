@@ -5,8 +5,13 @@ All notable changes to this project will be documented in this file.
 <a name="unreleased"></a>
 ## [Unreleased]
 
-<a name="v1.0.0"></a>
-## [v1.0.0] - 2021-11-29
+<a name="v1.0.0-rc2"></a>
+## [v1.0.0-rc2] - 2021-11-29
+
+- add additional values and defaults to the richminchukio/aks-appgw-fe helm chart.
+
+<a name="v1.0.0-rc1"></a>
+## [v1.0.0-rc1] - 2021-11-29
 
 - Major overhaul to use richminchukio/aks-appgw-fe helm chart.
 

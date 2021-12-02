@@ -42,13 +42,11 @@ variable "blue_green" {
 variable "infra_prefix" {
    type = string
    description = "A prefix for your terraformed resources: ie 'tf_my_thing'"
-   default = ""
 }
 
 variable "k8s_version" {
    type = string
    description = "Which Kuberentes preview aks version to create"
-   default = ""
 }
 
 variable "ssh_public_key" {

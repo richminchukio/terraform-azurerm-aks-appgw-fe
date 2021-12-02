@@ -45,33 +45,33 @@ variable "blue_green" {
    default = "blue"
 }
 
+variable "cert_manager_crds_hack_enabled" {
+   type        = bool
+   description = "helm doesn't deploy dependant chart CRDs before the parent chart api objects. IE: cert-manager.io/Issuer manifest fails to deploy. Cert-Manager needs to support CRDs folder naming convention for helm 3, until then hack it."
+   default     = false
+}
+
+variable "cert_manager_crds_hack_url" {
+   type        = string
+   description = "helm doesn't deploy dependant chart CRDs before the parent chart api objects. IE: cert-manager.io/Issuer manifest fails to deploy. Cert-Manager needs to support CRDs folder naming convention for helm 3, until then hack it."
+   default     = "https://github.com/jetstack/cert-manager/releases/download/v1.6.1/cert-manager.crds.yaml"
+}
+
 variable "helm_aks_appgw_fe_version" {
    type = string
    description = "the richminchukio/aks-appgw-fe chart version"
+   default = "1.0.0"
 }
 
-variable "infra_prefix" {
+variable "helm_aks_appgw_fe_values_yaml_full_path" {
    type = string
-   description = "ie 'tf_my_thing'"
-   default = "tf"
-}
-
-variable "image_repository" {
-   type = string
-   description = "The default image repository to use for the fe container"
-   default = "httpd"
-}
-
-variable "image_tag" {
-   type = string
-   description = "The default image tag to use for the fe container"
-   default = "latest"
+   description = "An optional values.yaml file for further control of the richminchukio/aks-appgw-fe helm chart"
+   default = "values.yaml"
 }
 
 variable "k8s_version" {
    type = string
    description = "Which Kuberentes preview aks version to create"
-   default = ""
 }
 
 variable "ssh_public_key" {
@@ -79,8 +79,7 @@ variable "ssh_public_key" {
    description = "Your public key at ~/.ssh/id_rsa.pub. IE: `export TF_VAR_ssh_public_key=$(cat ~/.ssh/id_rsa.pub)`"
 }
 
-variable "values_yaml_full_path" {
+variable "infra_prefix" {
    type = string
-   description = "An optional values.yaml file for further control of the richminchukio/aks-appgw-fe helm chart"
-   default = "values.yaml"
+   description = "ie 'tf_my_thing'"
 }

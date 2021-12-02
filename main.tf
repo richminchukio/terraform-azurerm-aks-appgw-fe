@@ -89,18 +89,16 @@ module "aks_appgw_fe" {
    source     = "./modules/helm_aks_appgw_fe"
 
    # Chart versions and chart values
-   azurerm_appgw_name                = module.k8s_appgw_for_ingress_control.azurerm_appgw_name
-   azurerm_auth_identity_resource_id = module.k8s_appgw_for_ingress_control.azurerm_auth_identity_resource_id
-   azurerm_auth_identity_client_id   = module.k8s_appgw_for_ingress_control.azurerm_auth_identity_client_id
-   azurerm_public_ip_fqdn            = azurerm_public_ip.public_ip.fqdn
-   azurerm_rg_name                   = azurerm_resource_group.resource_group.name
-   azurerm_subscription_id           = data.azurerm_subscription.current.subscription_id
-   blue_green                        = var.blue_green
-   helm_aks_appgw_fe_version         = var.helm_aks_appgw_fe_version
-   infra_prefix                      = var.infra_prefix
-   image_repository                  = var.image_repository
-   image_tag                         = var.image_tag
-   values_yaml_full_path             = var.values_yaml_full_path
+   azurerm_appgw_name                            = module.k8s_appgw_for_ingress_control.azurerm_appgw_name
+   azurerm_auth_identity_resource_id             = module.k8s_appgw_for_ingress_control.azurerm_auth_identity_resource_id
+   azurerm_auth_identity_client_id               = module.k8s_appgw_for_ingress_control.azurerm_auth_identity_client_id
+   azurerm_public_ip_fqdn                        = azurerm_public_ip.public_ip.fqdn
+   azurerm_rg_name                               = azurerm_resource_group.resource_group.name
+   azurerm_subscription_id                       = data.azurerm_subscription.current.subscription_id
+   blue_green                                    = var.blue_green
+   helm_aks_appgw_fe_version                     = var.helm_aks_appgw_fe_version
+   helm_aks_appgw_fe_values_yaml_full_path       = var.helm_aks_appgw_fe_values_yaml_full_path
+   infra_prefix                                  = var.infra_prefix
 }
 
 output "ip_address" {
