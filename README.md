@@ -31,11 +31,15 @@ az provider register --namespace Microsoft.ContainerService
 ssh-keygen
 ```
 
-# GET values.yaml from the richminchukio/aks-appgw-fe helm chart repository
-curl --output ./values.yaml https://raw.githubusercontent.com/richminchukio/helm-aks-appgw-fe/main/values.yaml
+## GET values.yaml from the richminchukio/aks-appgw-fe helm chart repository
 
 ```zsh
-# create a main.tf file
+curl --output ./values.yaml https://raw.githubusercontent.com/richminchukio/helm-aks-appgw-fe/main/values.yaml
+```
+
+## CREATE a main.tf file
+
+```zsh
 echo "
 module \"aks-appgw-fe\" {
    source  = \"richminchukio/aks-appgw-fe/azurerm\"
@@ -56,7 +60,7 @@ module \"aks-appgw-fe\" {
 }" >>./main.tf
 ```
 
-## SETUP variables.tf.json
+## CREATE a variables.tf.json file
 
 ```zsh
 echo "{

@@ -101,9 +101,19 @@ module "aks_appgw_fe" {
    helm_aks_appgw_fe_values_yaml_full_path       = var.helm_aks_appgw_fe_values_yaml_full_path
 }
 
+output "resource_group_name" {
+   value       = azurerm_resource_group.resource_group.name
+   description = "The name of the created resource group appgw"
+}
+
 output "ip_address" {
    value       = azurerm_public_ip.public_ip.ip_address
    description = "The frontend IP address of your appgw"
+}
+
+output "ip_id" {
+   value       = azurerm_public_ip.public_ip.id
+   description = "The id of your public ip"
 }
 
 output "fqdn" {
