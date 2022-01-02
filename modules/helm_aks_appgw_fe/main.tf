@@ -1,6 +1,14 @@
 #############################################################################################################################################
 # HELM - richminchukio/aks-appgw-fe: aad-pod-identity, ingress-azure, cert-manager
 
+terraform {
+   required_providers {
+      azurerm = {
+         version = "~>2.28"
+      }
+   }
+}
+
 # Create Cert-Manager CRDs until Cert-Manager chart supports the CRDs folder standard of helm3. more info [here](https://github.com/jetstack/cert-manager/issues/4613#issuecomment-982906448)
 resource "null_resource" "sh_kubectl_apply_crds_hack" {
    count     = var.cert_manager_crds_hack_enabled ? 1 : 0

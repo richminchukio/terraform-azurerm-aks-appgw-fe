@@ -1,6 +1,12 @@
 ######################################################################################################
 # Azure Application Gateway setup
 
+terraform {
+   required_providers {
+      null = {}
+   }
+}
+
 locals {
    backend_address_pool_name      = "${var.azurerm_vn_name}_beap"
    frontend_port_name             = "${var.azurerm_vn_name}_feport"

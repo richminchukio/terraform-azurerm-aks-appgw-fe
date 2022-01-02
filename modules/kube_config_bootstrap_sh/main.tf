@@ -1,3 +1,9 @@
+terraform {
+   required_providers {
+      null = {}
+   }
+}
+
 resource "null_resource" "sh_az_aks_bootstrap_helm" {
    triggers   = {
       always_run = "${timestamp()}"

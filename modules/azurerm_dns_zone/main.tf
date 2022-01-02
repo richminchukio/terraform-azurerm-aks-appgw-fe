@@ -1,6 +1,14 @@
 #############################################################################################################################################
 # DNS Zones. IE: Name 
 
+terraform {
+   required_providers {
+      azurerm = {
+         version = "~>2.28"
+      }
+   }
+}
+
 resource "azurerm_dns_zone" "dns_zone" {
    name                = var.dns_zone_domain_name
    resource_group_name = var.dns_zone_resource_group_name

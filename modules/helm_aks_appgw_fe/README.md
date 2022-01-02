@@ -28,7 +28,7 @@ module "aks-appgw-fe" {
 }
 
 module "aks-appgw-fe_helm_aks_appgw_fe" {
-   source  = "richminchukio/aks-appgw-fe/azurerm/helm_aks_appgw_fe"
+   source  = "richminchukio/aks-appgw-fe/azurerm//modules/helm_aks_appgw_fe"
    version = "1.0.0"
 
    azurerm_appgw_name                      = module.k8s_appgw_for_ingress_control.azurerm_appgw_name

@@ -25,7 +25,7 @@ I didn't feel like duplicating the provider code in my own IAC repo to get this 
 
 ```js
 module "aks-appgw-fe_azurerm_dns_zone" {
-   source  = "richminchukio/aks-appgw-fe/azurerm/azurerm_dns_zone"
+   source  = "richminchukio/aks-appgw-fe/azurerm//modules/azurerm_dns_zone"
    version = "1.0.0"
 
    dns_zone_a_record_ttl        = var.dns_zone_a_record_ttl
